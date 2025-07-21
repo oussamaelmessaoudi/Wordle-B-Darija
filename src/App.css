@@ -1,38 +1,61 @@
-.App {
-  text-align: center;
-}
-
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
-}
-
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
-}
-
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
+.header{
+  background-color: #FFFFFF;
+  border-bottom: 2px solid #DFDFDF;
+  color: black;
   display: flex;
-  flex-direction: column;
+  justify-content: left;
   align-items: center;
+  font-size: 2rem;
+  font-weight: bold;
+  height: 60px;
+  padding-left: 10px;
+}
+.grid{
+  padding-top: 60px;
+  display: flex;
   justify-content: center;
-  font-size: calc(10px + 2vmin);
+  /*let's center it in the middle of the page*/
+  align-items: center;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.row{
+  display: flex;
+  gap: 5px;
+}
+
+.case{
+  height: 52px;
+  width: 52px;
+  border: 2px solid #D3D6DA;
+  text-transform: uppercase;
+  color: black;
+  /* font-family: "nyt-franklin"; */
+  font-weight: bold;
+  font-size: 2rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.matched{
+  background-color: #6AAA64;
   color: white;
+  border: 2px solid #6AAA64;
 }
 
-.App-link {
-  color: #61dafb;
+.includes{
+  background-color: #C9B458;
+  color: white;
+  border: 2px solid #C9B458;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.incorrect{
+  background-color: #787C7E;
+  color: white;
+  border: 2px solid #787C7E;
 }
+/* yellow: #C9B458
+    green: #6AAA64
+    dark-gray: #787C7E*/
