@@ -3,6 +3,7 @@ import React from 'react';
 import './App.css';
 import Row from './components/Row';
 import * as XLSX from 'xlsx';
+import { FaInstagram, FaLinkedin, FaGithubSquare } from "react-icons/fa";
 
 function App() {
   // State to hold the target word
@@ -13,6 +14,8 @@ function App() {
   const [currentGuess, setCurrentGuess] = useState('');
   // State to set if the game finished or not
   const [gameFinished, setGameFinished] = useState(false);
+
+  const [displayTarget, setDisplayTarget] = useState(false);
   // Fetching data from the API
   useEffect(() => {
     const fetchData = async () => {
@@ -40,10 +43,8 @@ function App() {
 
         const randomWord = wordList[Math.floor(Math.random() * wordList.length)];
         setTargetWord(randomWord);
-        console.log('Target word:', randomWord);
 
       } catch (error) {
-        console.error('Error loading XLSX:', error);
       }
     }
     fetchData();
@@ -53,10 +54,11 @@ function App() {
   useEffect(() => {
     const handleKeyPressing = (event) =>{
       if(gameFinished) return;
-
+      if(displayTarget){
+        return;
+      }
       if(event.key ==='Enter'){  
         if(currentGuess.length !== 5){
-          console.log(currentGuess.length);
           return;
         }
         //let's make a copy off the current guessedWords so we don't modify the state directly
@@ -67,6 +69,11 @@ function App() {
         setGuessedWords(newGuesses);
         // clear the current guess so the user enter a new one
         setCurrentGuess('');
+        const guessesMade = guessedWords.filter(word => word !== null).length+1;
+        if(guessesMade >= 6){
+          setGameFinished(true);
+          setDisplayTarget(true);
+        }
       }
       
 
@@ -74,18 +81,18 @@ function App() {
         setCurrentGuess(prev => prev.substring(0, prev.length-1));
         return;
       }
-      const checkCorrect = currentGuess.toLocaleLowerCase === 'Talks'.toLowerCase;
+      const checkCorrect = currentGuess.toLocaleLowerCase === targetWord.toLowerCase;
       if(checkCorrect) setGameFinished(true);
 
       if(currentGuess.length >= 5) return;
       const isLetter = /^[a-z]$/.test(event.key);
       if(isLetter) setCurrentGuess(prevGuess => prevGuess + event.key);
-      console.log(currentGuess.length);
+      
     };
 
     window.addEventListener('keydown',handleKeyPressing);
     return () => window.removeEventListener('keydown',handleKeyPressing)
-  },[currentGuess, gameFinished, targetWord, guessedWords]);
+  },[currentGuess, gameFinished, targetWord, guessedWords, displayTarget]);
   return (
     <div>
     <div className='header'>Wordle B'Darija </div>
@@ -103,6 +110,27 @@ function App() {
           );
         })
       }
+      {displayTarget && <div className='target-word'> Target word : {targetWord}</div>}
+    </div>
+    
+    <div className='footer'>
+      <div className='text'>
+        <span id='rights'>All rights reserved </span>
+        <span style={{ fontSize: '12px' }}>© Oussama ELMESSAOUDI 2025</span>
+      </div>
+      <div className='icons'>
+        <a href='https://www.instagram.com/usamamse' target='_blank' rel='noopener noreferrer'>
+           <FaInstagram/>
+        </a>
+        <a href='https://www.linkedin.com/in/usama-elmessaoudi/' target='_blank' rel='noopener noreferrer'>
+           <FaLinkedin />
+        </a>
+        <a href='https://www.github.com/oussamaelmessaoudi' target='_blank' rel='noopener noreferrer'>
+           <FaGithubSquare />
+        </a>
+          
+          
+      </div>
     </div>
     </div>
   );
