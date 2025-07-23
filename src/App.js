@@ -82,7 +82,7 @@ function App() {
           );
         })
       }
-      {displayTarget && <div className='target-word'> Target word : {targetWord}</div>}
+      {displayTarget && <div className='target-word'>{targetWord}</div>}
     </div>
     
     <div className='footer'>

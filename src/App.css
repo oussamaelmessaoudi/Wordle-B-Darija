@@ -140,8 +140,20 @@
 }
 
 .target-word{
-  font-size: 15px;
+  display: flex;
+  font-size: 1.3rem;
+  border-radius: 5px;
+  font-weight: bold;
+  text-transform: uppercase;
+  background-color: #121212;
+  color : white;
+  line-height: 1;
+  box-sizing: border-box;
+  user-select: none;
+  vertical-align: middle;
+  padding: 13px 8px;
 }
+
 /* yellow: #C9B458
     green: #6AAA64
     dark-gray: #787C7E*/
