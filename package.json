@@ -2,7 +2,6 @@
   "name": "wordle-darija",
   "version": "0.1.0",
   "private": true,
-  "proxy": "https://api.frontendexpert.io",
   "homepage": "https://oussamaelmessaoudi.github.com/Wordle-B-Darija",
   "dependencies": {
     "@testing-library/dom": "^10.4.0",

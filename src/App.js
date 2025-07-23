@@ -2,8 +2,8 @@ import {useEffect , useState} from 'react';
 import React from 'react';
 import './App.css';
 import Row from './components/Row';
-import * as XLSX from 'xlsx';
 import { FaInstagram, FaLinkedin, FaGithubSquare } from "react-icons/fa";
+import Words from './words.json'
 
 function App() {
   // State to hold the target word
@@ -18,37 +18,9 @@ function App() {
   const [displayTarget, setDisplayTarget] = useState(false);
   // Fetching data from the API
   useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const response = await fetch('/ListofWords.xlsx');
-
-        if (!response.ok) {
-          throw new Error('Failed to load XLSX file');
-        }
-
-        const arrayBuffer = await response.arrayBuffer();
-
-        
-        const workbook = XLSX.read(arrayBuffer, { type: 'array' });
-        const sheetName = workbook.SheetNames[0]; // First sheet
-        const worksheet = workbook.Sheets[sheetName];
-
-        // Convert to JSON
-        const data = XLSX.utils.sheet_to_json(worksheet, { header: 1 });
-
-        
-        const wordList = data.flat().filter(word =>
-          typeof word === 'string' && word.length === 5 && /^[a-z]+$/.test(word)
-        );
-
-        const randomWord = wordList[Math.floor(Math.random() * wordList.length)];
-        setTargetWord(randomWord);
-
-      } catch (error) {
-      }
-    }
-    fetchData();
-  },[])
+    const randomWord = Words.words[Math.floor(Math.random() * Words.words.length)];
+    setTargetWord(randomWord);
+  }, []);
 
   // Now let's handle the keyboard event 
   useEffect(() => {
